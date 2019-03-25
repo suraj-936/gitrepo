@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   connection: local
+  sudo: yes
   tasks:
     - name: checkout for ansible playbook
       git: 
@@ -12,7 +13,8 @@
         repo: https://github.com/anfederico/Flaskex.git 
         dest: /home/anfederico/
 
-    - git:
+    - name: clone repository
+      git:
         repo: 'https://github.com/anfederico/Flaskex.git'
         dest: /srv/checkout
         clone: yes 
@@ -21,3 +23,7 @@
     - name: requirements file 
       pip:
          requirements: /srv/checkout/requirements.txt
+
+    - name: execute script
+      tags: run
+      command: python /srv/checkout/app.py
