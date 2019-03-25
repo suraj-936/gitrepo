@@ -1,0 +1,15 @@
+---
+- git: 
+   repo:https://github.com/anfederico/Flaskex.git
+   dest:/srv/checkout
+   version:release-0.22
+
+- git:
+   repo:git@github.com:anfederico/Flaskex.git
+   dest:/home/suraj/gitrepo/anfederico/Flaskex.git
+
+- git:
+   repo:https://github.com/anfederico/Flaskex.git
+   dest:/srv/checkout
+   clone:yes
+   update:yes
