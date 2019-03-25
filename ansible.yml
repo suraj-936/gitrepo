@@ -1,24 +1,23 @@
 ---
-- hosts:all
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: checkout for ansible playbook
+      git: 
+        repo: 'https://github.com/anfederico/Flaskex.git'
+        dest: /srv/checkout
 
-- git: 
-   repo:https://github.com/anfederico/Flaskex.git
-   dest:/srv/checkout
-   version:release-0.22
+    - name: read-write git checkout for github
+      git:
+        repo: https://github.com/anfederico/Flaskex.git 
+        dest: /home/anfederico/
 
-- git:
-   repo:git@github.com:anfederico/Flaskex.git
-   dest:/home/suraj/gitrepo/anfederico/Flaskex.git
+    - git:
+        repo: 'https://github.com/anfederico/Flaskex.git'
+        dest: /srv/checkout
+        clone: yes 
+        update: no
 
-- git:
-   repo:https://github.com/anfederico/Flaskex.git
-   dest:/srv/checkout
-   clone:yes
-   update:yes
-
-- name: goto directory
-  command:chdir=home/suraj/gitrepo/Flaskex
-
-- name: requirements file 
-  pip:
-   requirements:requirements.txt
+    - name: requirements file 
+      pip:
+         requirements: /srv/checkout/requirements.txt
